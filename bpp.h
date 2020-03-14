@@ -21,11 +21,22 @@
  *  o numero de itens e a soma total de pesos.
  */
 typedef struct bpp_t {
-	int C, w_sum;
+	size_t C, w_sum;
 	int * w;
 	size_t n;
 	struct list_head list;
 } bpp;
+
+
+/**
+* @brief: Create a string that represents the content of instance
+*
+* @param: const bpp instance
+*       : char * dest
+*
+* @return: char *
+*/
+char * bpptostr(const bpp instance,char * dest);
 
 /**
 * @brief: Read a formated file of a BPP instance. The file must be one integer per line, structured as follows:
@@ -67,11 +78,12 @@ static inline int lower_bound(const bpp instance);
 void benchmark(char * path /*, solver solvers[]*/);
 
 #define instance_alloc(inst) \
-		(inst).w = ((inst).n != 0) ?  (int *) malloc((inst).n*sizeof(int)) : NULL;
-#define instance_alloc_ptr(inst) inst = malloc(sizeof(struct bpp_t));
+		(inst).w = ((inst).n != 0) ?  (int *) malloc((inst).n*sizeof(int)) : NULL
+#define instance_alloc_ptr(inst) inst = (struct bpp_t *) malloc(sizeof(struct bpp_t))
+#define instance_destroy(inst) free( (isnt).w )
 
-#define instance_init0(inst) (inst).C = (inst).w_sum = (inst).n = 0; (inst).w = NULL;
-#define instance_init(inst,c,nitens) inst.C = c; inst.w_sum = 0; inst.n=nitens;\
-		instance_alloc(inst);
+#define instance_init0(inst) {(inst).C = (inst).w_sum = (inst).n = 0; (inst).w = NULL;}
+#define instance_init(inst,c,nitens) {inst.C = c; inst.w_sum = 0; inst.n=nitens;\
+		instance_alloc(inst);}
 
 #endif /* end of include guard: BPP_H_JCGHVQGV */

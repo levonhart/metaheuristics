@@ -1,31 +1,54 @@
 #include <stdio.h>
 #include <string.h>
 #include "bpp.h"
+#include "sol.h"
 
 int read_instance(char * path, bpp * instance){
 	FILE* file; fopen_s(&file, path, "r");
 	if (file == NULL) {
 		printf("Arquivo nao existente:\npath: %s\n", path);
-		return 1;
+		return -1;
 	}
-	fscanf(file, "%zd%d", &instance->n, &instance->C);
+	fscanf(file, "%zu%zu", &instance->n, &instance->C);
 	if (instance == NULL) instance_alloc_ptr(instance);
 	instance_alloc(*instance);
 
 	instance->w_sum = 0;
 	for (int i = 0; i < instance->n; ++i) {
-		fscanf(file, "%d", &(instance->w)[i]);
+		if( !fscanf(file, "%d", &(instance->w)[i]) ) return -2;
 		instance->w_sum += (instance->w)[i];
 	}
 
 	fclose(file);
 
-	return 1;
+	return 0;
 }
 
 static inline int lower_bound(const bpp instance){
 	return (instance.w_sum % instance.C) == 0 ?		\
 			instance.w_sum/instance.C : instance.w_sum/instance.C + 1;
+}
+char * bpptostr(const bpp instance,char * dest){
+	size_t size = 256;
+	size_t length = 0;
+	char * str = (char *) malloc( size*sizeof(char) );
+	length+= snprintf(str, size,"C: %zu\n" \
+			"w_sum: %zu\n{ ", \
+			instance.C,instance.w_sum);
+	for (int i = 0; i < instance.n; ++i) {
+		if(size-length < 30){
+			size = 3*size/2;
+			str = (char *) realloc(str, size * sizeof(char));
+		}
+		length+= snprintf(str + length, size - length,"%d%s", \
+				instance.w[i], i < instance.n-1 ? " , " : " ");
+	}
+	length += snprintf(str + length,size-length,"}\nLB : %d\n", lower_bound(instance));
+	if (dest){
+		free(dest);
+		dest = str;
+	}
+	return str;
 }
 
 
@@ -53,17 +76,10 @@ void benchmark(char * path /*, solver solvers[] */){
 	struct list_head * iter;
 	list_for_each(iter, &instances){
 		inst = list_entry(iter, bpp, list);
-
-		printf("C: %d\n"\
-				"w_sum: %d\n",inst->C,inst->w_sum);
-		printf("[ ");
-		for (int i = 0; i < inst->n; ++i) {
-			printf("%d ", inst->w[i]);
-		}
-		printf("]\n");
-		printf("LB : %d\n", lower_bound(*inst));
+		printf("%s\n", bpptostr(*inst, NULL));
 	}
 
+	free(inst);
 	closedir(dir);
 }
 
@@ -72,8 +88,72 @@ int main(int argc, char *argv[]){
 	if (path==NULL) {
 		path = "instances/Hard28/";
 	}
-	
-	benchmark(path);
 
+	/* benchmark(path); */
+	bpp inst;
+	instance_init0(inst);
+	read_instance("instances/Scholl/Scholl_1/N1C1W1_A.txt", &inst);
+	printf("%s\n\n", bpptostr(inst,NULL));
+
+
+
+	/* bin b; */
+	/* bin_alloc(b); */
+	/* printf("b:%zu,%zu, l:%d\n",b.n, b._max_size,b.load); */
+	/* for (int i = 0; i < 4; ++i) { */
+	/*     printf(" %zu{%d} ", b.itens[i], inst.w[i]); */
+	/* } */
+	/* printf("\n"); */
+	/* for (int i = 0; i < inst.n; ++i) { */
+		/* bin_add(&b,i,inst.w[8]); */
+		/* printf("b:%zu,%zu, l:%d\n",b.n, b._max_size,b.load); */
+	/* } */
+
+	/* printf("b:%zu,%zu, l:%d\n",b.n, b._max_size,b.load); */
+	/* for (int i = 0; i < 10; ++i) { */
+	/*     printf(" %zu{%d} ", b.itens[i], inst.w[i]); */
+	/* } */
+	/* printf("\n"); */
+
+	/* printf("L:%d { item0:%zu, item1:%zu } \n", b.load, b.itens[0], b.itens[1]); */
+	/* printf("%s\n", bintostr(b,NULL,inst.w)); */
+
+	/* for (int i = 2; i < inst.n; i+=1) { */
+	/*     bin_remove(&b,i,inst.w[8]); */
+	/*     printf("b:%zu,%zu, l:%d\n",b.n, b._max_size,b.load); */
+	/* } */
+
+	/* sol * s = sol_trivial(inst); */
+	sol s;
+	sol_alloc(s, inst);
+	sol_add_new_bin(&s);
+	printf("%s\n", bintostr(s.bins[0], NULL, inst.w));
+
+	sol_add_i_j(&s,20,0);
+	sol_add_i_j(&s,30,0);
+
+	for (int i = 0; i < s.n_bins; ++i) {
+		printf("%s\n", bintostr(s.bins[i], NULL, inst.w));
+	}
+	for (int i = 0; i < s.inst_ptr->n; ++i) {
+		if (s.bin_of[i])
+			printf("item %d: bin%s\n", i,bintostr(*s.bin_of[i], NULL, inst.w));
+	}
+	sol_remove_item(&s,20);
+
+	for (int i = 0; i < s.n_bins; ++i) {
+		printf("%s\n", bintostr(s.bins[i], NULL, inst.w));
+	}
+
+	printf("%s\n",soltostr(s,NULL));
+
+	/* sol trivial = sol_trivial(inst); */
+	sol trivial;
+	sol_alloc(trivial,inst);
+	sol_trivial(&trivial,inst);
+	/* sol_alloc(trivial,inst); */
+	/* trivial = sol_trivial(inst); */
+	/* printf("%s\n",soltostr(trivial,NULL)); */
+	/* printf("%s\n", bintostr(trivial->bins[0],NULL,inst.w)); */
 	return 0;
 }
