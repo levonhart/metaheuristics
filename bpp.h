@@ -34,9 +34,9 @@ typedef struct bpp_t {
 * @param: const bpp instance
 *       : char * dest
 *
-* @return: char *
+* @return: char **
 */
-char * bpptostr(const bpp instance,char * dest);
+char * bpptostr(const bpp instance,char ** dest);
 
 /**
 * @brief: Read a formated file of a BPP instance. The file must be one integer per line, structured as follows:

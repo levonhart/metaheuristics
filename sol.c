@@ -1,5 +1,4 @@
 #include <stdio.h>
-#include <stdlib.h>
 #include "sol.h"
 
 int sol_add_item(sol * s, size_t i, bin * b){
@@ -47,12 +46,10 @@ void sol_trivial(sol * s, bpp instance){
 		sol_destroy(*trivial);
 		sol_alloc(*trivial, instance);
 	}
-	printf("\n\n%s\n", soltostr(*trivial, NULL));
 	for (int i = 0; i < instance.n; ++i) {
 		sol_add_new_bin(trivial);
 		sol_add_i_j(trivial,i,i);
 	}
-	printf("%s\n", soltostr(*trivial, NULL));
 }
 
 char * soltostr(const sol s, char ** dest){
@@ -64,8 +61,8 @@ char * soltostr(const sol s, char ** dest){
 	for (int i = 0; i < s.n_bins; ++i) {
 		bintostr(s.bins[i], &buffer, s.inst_ptr->w);
 		lbuffer = strlen(buffer);
-		if(size-length < lbuffer){
-			size = length+lbuffer > 3*size/2 ? length+lbuffer+1 : 3*size/2;
+		if(size-length <= lbuffer){
+			size = 2*(length+lbuffer+1);
 			str = (char *) realloc(str, size * sizeof(char));
 		}
 		length+= snprintf(str + length, size - length,"%s%s", \
@@ -75,6 +72,7 @@ char * soltostr(const sol s, char ** dest){
 		free(*dest);
 		*dest = str;
 	}
+	free(buffer);
 	return str;
 }
 

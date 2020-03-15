@@ -2,6 +2,7 @@
 #include <string.h>
 #include "bpp.h"
 #include "sol.h"
+#include "solver.h"
 
 int read_instance(char * path, bpp * instance){
 	FILE* file; fopen_s(&file, path, "r");
@@ -28,7 +29,7 @@ static inline int lower_bound(const bpp instance){
 	return (instance.w_sum % instance.C) == 0 ?		\
 			instance.w_sum/instance.C : instance.w_sum/instance.C + 1;
 }
-char * bpptostr(const bpp instance,char * dest){
+char * bpptostr(const bpp instance,char ** dest){
 	size_t size = 256;
 	size_t length = 0;
 	char * str = (char *) malloc( size*sizeof(char) );
@@ -45,15 +46,15 @@ char * bpptostr(const bpp instance,char * dest){
 	}
 	length += snprintf(str + length,size-length,"}\nLB : %d\n", lower_bound(instance));
 	if (dest){
-		free(dest);
-		dest = str;
+		free(*dest);
+		*dest = str;
 	}
 	return str;
 }
 
 
 void benchmark(char * path /*, solver solvers[] */){
-	bpp * inst;
+	bpp * inst; char * buffer;
 	LIST_HEAD(instances);
 
 	DIR * dir = opendir(path);
@@ -76,15 +77,16 @@ void benchmark(char * path /*, solver solvers[] */){
 	struct list_head * iter;
 	list_for_each(iter, &instances){
 		inst = list_entry(iter, bpp, list);
-		printf("%s\n", bpptostr(*inst, NULL));
+		printf("%s\n", bpptostr(*inst, &buffer));
 	}
 
-	free(inst);
+	free(inst); free(buffer);
 	closedir(dir);
 }
 
 int main(int argc, char *argv[]){
 	char * path = argv[1];
+	char * buffer;
 	if (path==NULL) {
 		path = "instances/Hard28/";
 	}
@@ -93,7 +95,7 @@ int main(int argc, char *argv[]){
 	bpp inst;
 	instance_init0(inst);
 	read_instance("instances/Scholl/Scholl_1/N1C1W1_A.txt", &inst);
-	printf("%s\n\n", bpptostr(inst,NULL));
+	printf("%s\n\n", bpptostr(inst,&buffer));
 
 
 
@@ -116,7 +118,7 @@ int main(int argc, char *argv[]){
 	/* printf("\n"); */
 
 	/* printf("L:%d { item0:%zu, item1:%zu } \n", b.load, b.itens[0], b.itens[1]); */
-	/* printf("%s\n", bintostr(b,NULL,inst.w)); */
+	/* printf("%s\n", bintostr(b,&buffer,inst.w)); */
 
 	/* for (int i = 2; i < inst.n; i+=1) { */
 	/*     bin_remove(&b,i,inst.w[8]); */
@@ -127,25 +129,25 @@ int main(int argc, char *argv[]){
 	sol s;
 	sol_alloc(s, inst);
 	sol_add_new_bin(&s);
-	printf("%s\n", bintostr(s.bins[0], NULL, inst.w));
+	printf("%s\n", bintostr(s.bins[0], &buffer, inst.w));
 
 	sol_add_i_j(&s,20,0);
 	sol_add_i_j(&s,30,0);
 
 	for (int i = 0; i < s.n_bins; ++i) {
-		printf("%s\n", bintostr(s.bins[i], NULL, inst.w));
+		printf("%s\n", bintostr(s.bins[i], &buffer, inst.w));
 	}
-	for (int i = 0; i < s.inst_ptr->n; ++i) {
-		if (s.bin_of[i])
-			printf("item %d: bin%s\n", i,bintostr(*s.bin_of[i], NULL, inst.w));
-	}
+	/* for (int i = 0; i < s.inst_ptr->n; ++i) { */
+	/*     if (s.bin_of[i]) */
+	/*         printf("item %d: bin%s\n", i,bintostr(*s.bin_of[i], &buffer, inst.w)); */
+	/* } */
 	sol_remove_item(&s,20);
 
 	for (int i = 0; i < s.n_bins; ++i) {
-		printf("%s\n", bintostr(s.bins[i], NULL, inst.w));
+		printf("%s\n", bintostr(s.bins[i], &buffer, inst.w));
 	}
 
-	printf("%s\n",soltostr(s,NULL));
+	printf("%s\n",soltostr(s,&buffer));
 
 	/* sol trivial = sol_trivial(inst); */
 	sol trivial;
@@ -153,7 +155,8 @@ int main(int argc, char *argv[]){
 	sol_trivial(&trivial,inst);
 	/* sol_alloc(trivial,inst); */
 	/* trivial = sol_trivial(inst); */
-	/* printf("%s\n",soltostr(trivial,NULL)); */
-	/* printf("%s\n", bintostr(trivial->bins[0],NULL,inst.w)); */
+	printf("%s\n",soltostr(trivial,&buffer));
+	/* printf("%s\n", bintostr(trivial->bins[0],&buffer,inst.w)); */
+	free(buffer);
 	return 0;
 }

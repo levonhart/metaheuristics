@@ -1,6 +1,7 @@
 #ifndef SOL_H_JGUSTNUO
 #define SOL_H_JGUSTNUO
 
+#include <stdlib.h>
 #include "bpp.h"
 
 typedef struct bin_t bin;
