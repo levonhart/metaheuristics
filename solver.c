@@ -1,6 +1,6 @@
 #include <stdio.h>
 #include "solver.h"
-#include "hc.h"
+#include "solvers.h"
 
 void solver_start(solver * sl, sol * dest){
 	switch (sl->t) {

@@ -7,3 +7,209 @@
 !_TAG_PROGRAM_NAME	Universal Ctags	/Derived from Exuberant Ctags/
 !_TAG_PROGRAM_URL	https://ctags.io/	/official site/
 !_TAG_PROGRAM_VERSION	0.0.0	/30cd8e03/
+BPP_H_JCGHVQGV	bpp.h	/^#define BPP_H_JCGHVQGV$/;"	d
+C	bpp.h	/^	size_t C, w_sum;$/;"	m	struct:bpp_t	typeref:typename:size_t
+DIR	include/dirent.h	/^struct DIR {$/;"	s
+DIR	include/dirent.h	/^typedef struct DIR DIR;$/;"	t	typeref:struct:DIR
+DIRENT_H	include/dirent.h	/^#define DIRENT_H$/;"	d
+DTTOIF	include/dirent.h	/^#define DTTOIF(/;"	d
+DT_BLK	include/dirent.h	/^#define DT_BLK /;"	d
+DT_CHR	include/dirent.h	/^#define DT_CHR /;"	d
+DT_DIR	include/dirent.h	/^#define DT_DIR /;"	d
+DT_FIFO	include/dirent.h	/^#define DT_FIFO /;"	d
+DT_LNK	include/dirent.h	/^#define DT_LNK /;"	d
+DT_REG	include/dirent.h	/^#define DT_REG /;"	d
+DT_SOCK	include/dirent.h	/^#define DT_SOCK /;"	d
+DT_UNKNOWN	include/dirent.h	/^#define DT_UNKNOWN /;"	d
+FILENAME_MAX	include/dirent.h	/^#   define FILENAME_MAX /;"	d
+FILE_ATTRIBUTE_DEVICE	include/dirent.h	/^#   define FILE_ATTRIBUTE_DEVICE /;"	d
+HILLCLIMB_H_AED3PJBQ	hc.h	/^#define HILLCLIMB_H_AED3PJBQ$/;"	d
+IFTODT	include/dirent.h	/^#define IFTODT(/;"	d
+INIT_LIST_HEAD	include/list.h	/^#define INIT_LIST_HEAD(/;"	d
+LIST_H	include/list.h	/^#define LIST_H	/;"	d
+LIST_HEAD	include/list.h	/^#define LIST_HEAD(/;"	d
+LIST_HEAD_INIT	include/list.h	/^#define LIST_HEAD_INIT(/;"	d
+MIN_IMPROV	hc.h	/^#define MIN_IMPROV /;"	d
+NAME_MAX	include/dirent.h	/^#   define NAME_MAX /;"	d
+PATH_MAX	include/dirent.h	/^#   define PATH_MAX /;"	d
+SOLVERS_H_QCM5VIBX	solvers.h	/^#define SOLVERS_H_QCM5VIBX$/;"	d
+SOLVER_H_3PQ6AKOY	solver.h	/^#define SOLVER_H_3PQ6AKOY$/;"	d
+SOL_H_JGUSTNUO	sol.h	/^#define SOL_H_JGUSTNUO$/;"	d
+S_IEXEC	include/dirent.h	/^#   define S_IEXEC /;"	d
+S_IFBLK	include/dirent.h	/^#   define S_IFBLK /;"	d
+S_IFCHR	include/dirent.h	/^#   define S_IFCHR /;"	d
+S_IFDIR	include/dirent.h	/^#   define S_IFDIR /;"	d
+S_IFFIFO	include/dirent.h	/^#   define S_IFFIFO /;"	d
+S_IFIFO	include/dirent.h	/^#   define S_IFIFO /;"	d
+S_IFLNK	include/dirent.h	/^#   define S_IFLNK /;"	d
+S_IFMT	include/dirent.h	/^#   define S_IFMT /;"	d
+S_IFREG	include/dirent.h	/^#   define S_IFREG /;"	d
+S_IFSOCK	include/dirent.h	/^#   define S_IFSOCK /;"	d
+S_IREAD	include/dirent.h	/^#   define S_IREAD /;"	d
+S_IRGRP	include/dirent.h	/^#   define S_IRGRP /;"	d
+S_IROTH	include/dirent.h	/^#   define S_IROTH /;"	d
+S_IRUSR	include/dirent.h	/^#   define S_IRUSR /;"	d
+S_ISBLK	include/dirent.h	/^#   define S_ISBLK(/;"	d
+S_ISCHR	include/dirent.h	/^#   define S_ISCHR(/;"	d
+S_ISDIR	include/dirent.h	/^#   define S_ISDIR(/;"	d
+S_ISFIFO	include/dirent.h	/^#   define S_ISFIFO(/;"	d
+S_ISLNK	include/dirent.h	/^#   define S_ISLNK(/;"	d
+S_ISREG	include/dirent.h	/^#   define S_ISREG(/;"	d
+S_ISSOCK	include/dirent.h	/^#   define S_ISSOCK(/;"	d
+S_IWGRP	include/dirent.h	/^#   define S_IWGRP /;"	d
+S_IWOTH	include/dirent.h	/^#   define S_IWOTH /;"	d
+S_IWRITE	include/dirent.h	/^#   define S_IWRITE /;"	d
+S_IWUSR	include/dirent.h	/^#   define S_IWUSR /;"	d
+S_IXGRP	include/dirent.h	/^#   define S_IXGRP /;"	d
+S_IXOTH	include/dirent.h	/^#   define S_IXOTH /;"	d
+S_IXUSR	include/dirent.h	/^#   define S_IXUSR /;"	d
+VOLATILE_LIST_HEAD	include/list.h	/^#define VOLATILE_LIST_HEAD(/;"	d
+WDIR	include/dirent.h	/^#define WDIR /;"	d
+WIN32_LEAN_AND_MEAN	include/dirent.h	/^#   define WIN32_LEAN_AND_MEAN$/;"	d
+_DIRENT_HAVE_D_NAMLEN	include/dirent.h	/^#define _DIRENT_HAVE_D_NAMLEN$/;"	d
+_DIRENT_HAVE_D_TYPE	include/dirent.h	/^#define _DIRENT_HAVE_D_TYPE$/;"	d
+_D_ALLOC_NAMLEN	include/dirent.h	/^#define _D_ALLOC_NAMLEN(/;"	d
+_D_EXACT_NAMLEN	include/dirent.h	/^#define _D_EXACT_NAMLEN(/;"	d
+_WDIR	include/dirent.h	/^struct _WDIR {$/;"	s
+_WDIR	include/dirent.h	/^typedef struct _WDIR _WDIR;$/;"	t	typeref:struct:_WDIR
+__list_del	include/list.h	/^static inline void __list_del(struct list_head *prev, struct list_head *next)$/;"	f	typeref:typename:void
+__volatile_list_del	include/list.h	/^static inline void __volatile_list_del(volatile struct volatile_list_head *prev,$/;"	f	typeref:typename:void
+_max_size	sol.h	/^	size_t n, _max_size; \/*!< load and bin itens) *\/$/;"	m	struct:bin_t	typeref:typename:size_t
+_max_size	sol.h	/^	size_t n_bins, _max_size;$/;"	m	struct:sol_t	typeref:typename:size_t
+_wclosedir	include/dirent.h	/^_wclosedir($/;"	f	typeref:typename:int
+_wdirent	include/dirent.h	/^struct _wdirent {$/;"	s
+_wdirent	include/dirent.h	/^typedef struct _wdirent _wdirent;$/;"	t	typeref:struct:_wdirent
+_wopendir	include/dirent.h	/^_wopendir($/;"	f	typeref:typename:_WDIR *
+_wreaddir	include/dirent.h	/^_wreaddir($/;"	f	typeref:struct:_wdirent *
+_wreaddir_r	include/dirent.h	/^_wreaddir_r($/;"	f	typeref:typename:int
+_wrewinddir	include/dirent.h	/^_wrewinddir($/;"	f	typeref:typename:void
+alphasort	include/dirent.h	/^alphasort($/;"	f	typeref:typename:int
+benchmark	bpp.c	/^void benchmark(char * path , solver ** solvers, int n_solvers){$/;"	f	typeref:typename:void
+bin	sol.h	/^typedef struct bin_t bin;$/;"	t	typeref:struct:bin_t
+bin_add	sol.c	/^void bin_add(bin * b, size_t i, int w){$/;"	f	typeref:typename:void
+bin_alloc	sol.h	/^#define bin_alloc(/;"	d
+bin_alloc_ptr	sol.h	/^#define bin_alloc_ptr(/;"	d
+bin_decrease_size	sol.h	/^#define bin_decrease_size(/;"	d
+bin_destroy	sol.h	/^#define bin_destroy(/;"	d
+bin_of	sol.h	/^	size_t * bin_of;$/;"	m	struct:sol_t	typeref:typename:size_t *
+bin_realloc	sol.h	/^#define bin_realloc(/;"	d
+bin_remove	sol.c	/^void bin_remove(bin * b, size_t i, int w){$/;"	f	typeref:typename:void
+bin_t	sol.h	/^struct bin_t{$/;"	s
+bins	sol.h	/^	bin * bins; \/*!< list of bins, list of bins of itens *\/$/;"	m	struct:sol_t	typeref:typename:bin *
+bintostr	sol.c	/^char * bintostr(const bin b, char ** dest, const int * w){$/;"	f	typeref:typename:char *
+bpp	bpp.h	/^} bpp;$/;"	t	typeref:struct:bpp_t
+bpp_t	bpp.h	/^typedef struct bpp_t {$/;"	s
+bpptostr	bpp.c	/^char * bpptostr(const bpp instance,char ** dest){$/;"	f	typeref:typename:char *
+cached	include/dirent.h	/^    int cached;$/;"	m	struct:_WDIR	typeref:typename:int
+closedir	include/dirent.h	/^closedir($/;"	f	typeref:typename:int
+d_ino	include/dirent.h	/^    long d_ino;$/;"	m	struct:_wdirent	typeref:typename:long
+d_ino	include/dirent.h	/^    long d_ino;$/;"	m	struct:dirent	typeref:typename:long
+d_name	include/dirent.h	/^    char d_name[PATH_MAX+1];$/;"	m	struct:dirent	typeref:typename:char[]
+d_name	include/dirent.h	/^    wchar_t d_name[PATH_MAX+1];$/;"	m	struct:_wdirent	typeref:typename:wchar_t[]
+d_namlen	include/dirent.h	/^    size_t d_namlen;$/;"	m	struct:_wdirent	typeref:typename:size_t
+d_namlen	include/dirent.h	/^    size_t d_namlen;$/;"	m	struct:dirent	typeref:typename:size_t
+d_off	include/dirent.h	/^    long d_off;$/;"	m	struct:_wdirent	typeref:typename:long
+d_off	include/dirent.h	/^    long d_off;$/;"	m	struct:dirent	typeref:typename:long
+d_reclen	include/dirent.h	/^    unsigned short d_reclen;$/;"	m	struct:_wdirent	typeref:typename:unsigned short
+d_reclen	include/dirent.h	/^    unsigned short d_reclen;$/;"	m	struct:dirent	typeref:typename:unsigned short
+d_type	include/dirent.h	/^    int d_type;$/;"	m	struct:_wdirent	typeref:typename:int
+d_type	include/dirent.h	/^    int d_type;$/;"	m	struct:dirent	typeref:typename:int
+data	include/dirent.h	/^    WIN32_FIND_DATAW data;$/;"	m	struct:_WDIR	typeref:typename:WIN32_FIND_DATAW
+dirent	include/dirent.h	/^struct dirent {$/;"	s
+dirent	include/dirent.h	/^typedef struct dirent dirent;$/;"	t	typeref:struct:dirent
+dirent_first	include/dirent.h	/^dirent_first($/;"	f	typeref:typename:WIN32_FIND_DATAW *
+dirent_mbstowcs_s	include/dirent.h	/^dirent_mbstowcs_s($/;"	f	typeref:typename:int
+dirent_next	include/dirent.h	/^dirent_next($/;"	f	typeref:typename:WIN32_FIND_DATAW *
+dirent_set_errno	include/dirent.h	/^dirent_set_errno($/;"	f	typeref:typename:void
+dirent_wcstombs_s	include/dirent.h	/^dirent_wcstombs_s($/;"	f	typeref:typename:int
+ent	include/dirent.h	/^    struct _wdirent ent;$/;"	m	struct:_WDIR	typeref:struct:_wdirent
+ent	include/dirent.h	/^    struct dirent ent;$/;"	m	struct:DIR	typeref:struct:dirent
+first_imp3	hc.c	/^static bool first_imp3(hc * sl, sol * dest){$/;"	f	typeref:typename:bool	file:
+handle	include/dirent.h	/^    HANDLE handle;$/;"	m	struct:_WDIR	typeref:typename:HANDLE
+hc	hc.h	/^} hc;$/;"	t	typeref:struct:hc_t
+hc_alloc	hc.h	/^#define hc_alloc(/;"	d
+hc_init	hc.h	/^#define hc_init(/;"	d
+hc_solve	hc.c	/^void hc_solve(hc * sl, sol * dest){$/;"	f	typeref:typename:void
+hc_t	hc.h	/^typedef struct hc_t{$/;"	s
+inst_ptr	hc.h	/^	bpp * inst_ptr;$/;"	m	struct:hc_t	typeref:typename:bpp *
+inst_ptr	sol.h	/^	bpp * inst_ptr;$/;"	m	struct:sol_t	typeref:typename:bpp *
+instance_alloc	bpp.h	/^#define instance_alloc(/;"	d
+instance_alloc_ptr	bpp.h	/^#define instance_alloc_ptr(/;"	d
+instance_destroy	bpp.h	/^#define instance_destroy(/;"	d
+instance_init	bpp.h	/^#define instance_init(/;"	d
+instance_init0	bpp.h	/^#define instance_init0(/;"	d
+itens	sol.h	/^	size_t * itens;$/;"	m	struct:bin_t	typeref:typename:size_t *
+list	bpp.h	/^	struct list_head list;$/;"	m	struct:bpp_t	typeref:struct:list_head
+list_add	include/list.h	/^static inline void list_add(struct list_head *newp, struct list_head *head)$/;"	f	typeref:typename:void
+list_add_tail	include/list.h	/^static inline void list_add_tail(struct list_head *newp, struct list_head *head)$/;"	f	typeref:typename:void
+list_del	include/list.h	/^static inline void list_del(struct list_head *elem)$/;"	f	typeref:typename:void
+list_del_init	include/list.h	/^static inline void list_del_init(struct list_head *elem)$/;"	f	typeref:typename:void
+list_empty	include/list.h	/^static inline int list_empty(struct list_head *head)$/;"	f	typeref:typename:int
+list_entry	include/list.h	/^#define list_entry(/;"	d
+list_first_entry	include/list.h	/^#define list_first_entry(/;"	d
+list_for_each	include/list.h	/^#define list_for_each(/;"	d
+list_for_each_prev	include/list.h	/^#define list_for_each_prev(/;"	d
+list_for_each_prev_safe	include/list.h	/^#define list_for_each_prev_safe(/;"	d
+list_for_each_safe	include/list.h	/^#define list_for_each_safe(/;"	d
+list_head	include/list.h	/^struct list_head {$/;"	s
+list_move	include/list.h	/^static inline void list_move(struct list_head *elem, struct list_head *head)$/;"	f	typeref:typename:void
+list_replace	include/list.h	/^static inline void list_replace(struct list_head *old, struct list_head *newp)$/;"	f	typeref:typename:void
+list_replace_init	include/list.h	/^static inline void list_replace_init(struct list_head *old,$/;"	f	typeref:typename:void
+list_splice	include/list.h	/^static inline void list_splice(struct list_head *add, struct list_head *head)$/;"	f	typeref:typename:void
+load	sol.h	/^	int load;$/;"	m	struct:bin_t	typeref:typename:int
+lower_bound	bpp.c	/^static inline int lower_bound(const bpp instance){$/;"	f	typeref:typename:int	file:
+main	bpp.c	/^int main(int argc, char *argv[]){$/;"	f	typeref:typename:int
+n	bpp.h	/^	size_t n;$/;"	m	struct:bpp_t	typeref:typename:size_t
+n	sol.h	/^	size_t n, _max_size; \/*!< load and bin itens) *\/$/;"	m	struct:bin_t	typeref:typename:size_t
+n_bins	sol.h	/^	size_t n_bins, _max_size;$/;"	m	struct:sol_t	typeref:typename:size_t
+next	include/list.h	/^	struct list_head *next, *prev;$/;"	m	struct:list_head	typeref:struct:list_head *
+next	include/list.h	/^	volatile struct volatile_list_head *next, *prev;$/;"	m	struct:volatile_list_head	typeref:typename:volatile struct volatile_list_head *
+opendir	include/dirent.h	/^opendir($/;"	f	typeref:typename:DIR *
+patt	include/dirent.h	/^    wchar_t *patt;$/;"	m	struct:_WDIR	typeref:typename:wchar_t *
+prev	include/list.h	/^	struct list_head *next, *prev;$/;"	m	struct:list_head	typeref:struct:list_head *
+prev	include/list.h	/^	volatile struct volatile_list_head *next, *prev;$/;"	m	struct:volatile_list_head	typeref:typename:volatile struct volatile_list_head *
+read_instance	bpp.c	/^int read_instance(char * path, bpp * instance){$/;"	f	typeref:typename:int
+readdir	include/dirent.h	/^readdir($/;"	f	typeref:struct:dirent *
+readdir_r	include/dirent.h	/^readdir_r($/;"	f	typeref:typename:int
+rewinddir	include/dirent.h	/^rewinddir($/;"	f	typeref:typename:void
+scandir	include/dirent.h	/^scandir($/;"	f	typeref:typename:int
+sol	sol.h	/^typedef struct sol_t sol;$/;"	t	typeref:struct:sol_t
+sol_add_item	sol.c	/^int sol_add_item(sol * s, size_t i, size_t b){$/;"	f	typeref:typename:int
+sol_add_new_bin	sol.c	/^void sol_add_new_bin(sol * s){$/;"	f	typeref:typename:void
+sol_alloc	sol.h	/^#define sol_alloc(/;"	d
+sol_alloc_ptr	sol.h	/^#define sol_alloc_ptr(/;"	d
+sol_decrease_size	sol.h	/^#define sol_decrease_size(/;"	d
+sol_destroy	sol.h	/^#define sol_destroy(/;"	d
+sol_get_bin	sol.h	/^#define sol_get_bin(/;"	d
+sol_get_bin_of	sol.h	/^#define sol_get_bin_of(/;"	d
+sol_realloc	sol.h	/^#define sol_realloc(/;"	d
+sol_remove_bin	sol.c	/^int sol_remove_bin(sol * s, size_t b){$/;"	f	typeref:typename:int
+sol_remove_item	sol.c	/^int sol_remove_item(sol * s, size_t i){$/;"	f	typeref:typename:int
+sol_t	sol.h	/^struct sol_t{$/;"	s
+sol_trivial	sol.c	/^void sol_trivial(sol * s, bpp instance){$/;"	f	typeref:typename:void
+sol_w_of	sol.h	/^#define sol_w_of(/;"	d
+soltostr	sol.c	/^char * soltostr(const sol s, char ** dest){$/;"	f	typeref:typename:char *
+solver	solver.h	/^} solver;$/;"	t	typeref:struct:solver_t
+solver_start	solver.c	/^void solver_start(solver * sl, sol * dest){$/;"	f	typeref:typename:void
+solver_t	solver.h	/^typedef struct solver_t{$/;"	s
+solver_type	solver.h	/^} solver_type;$/;"	t	typeref:enum:solver_type_t
+solver_type_t	solver.h	/^typedef enum solver_type_t {$/;"	g
+t	hc.h	/^	solver_type t; \/*!< Solver type *\/$/;"	m	struct:hc_t	typeref:typename:solver_type
+t	solver.h	/^	solver_type t; \/*!< Solver type (0 : unset ) *\/$/;"	m	struct:solver_t	typeref:typename:solver_type
+t_hc	solver.h	/^	t_hc,$/;"	e	enum:solver_type_t
+t_ils	solver.h	/^	t_ils$/;"	e	enum:solver_type_t
+t_rms	solver.h	/^	t_rms,$/;"	e	enum:solver_type_t
+t_vnd	solver.h	/^	t_vnd,$/;"	e	enum:solver_type_t
+versionsort	include/dirent.h	/^versionsort($/;"	f	typeref:typename:int
+volatile_list_add	include/list.h	/^static inline void volatile_list_add(volatile struct volatile_list_head *newp,$/;"	f	typeref:typename:void
+volatile_list_del	include/list.h	/^static inline void volatile_list_del(volatile struct volatile_list_head *elem)$/;"	f	typeref:typename:void
+volatile_list_empty	include/list.h	/^static inline int volatile_list_empty(volatile struct volatile_list_head *head)$/;"	f	typeref:typename:int
+volatile_list_head	include/list.h	/^struct volatile_list_head {$/;"	s
+w	bpp.h	/^	int * w;$/;"	m	struct:bpp_t	typeref:typename:int *
+w_sum	bpp.h	/^	size_t C, w_sum;$/;"	m	struct:bpp_t	typeref:typename:size_t
+wclosedir	include/dirent.h	/^#define wclosedir /;"	d
+wdirent	include/dirent.h	/^#define wdirent /;"	d
+wdirp	include/dirent.h	/^    struct _WDIR *wdirp;$/;"	m	struct:DIR	typeref:struct:_WDIR *
+wopendir	include/dirent.h	/^#define wopendir /;"	d
+wreaddir	include/dirent.h	/^#define wreaddir /;"	d
+wrewinddir	include/dirent.h	/^#define wrewinddir /;"	d

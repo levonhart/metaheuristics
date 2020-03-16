@@ -11,7 +11,7 @@
  *  Detailed description
  */
 typedef struct hc_t{
-	enum solver_type t; /*!< Solver type */
+	solver_type t; /*!< Solver type */
 	bpp * inst_ptr;
 } hc;
 
@@ -25,6 +25,7 @@ typedef struct hc_t{
 */
 void hc_solve(hc * sl, sol * dest);
 
-#define hc_init(hc) (hc).t = t_hc;
+#define hc_alloc(ptr) {ptr = (hc*) malloc(sizeof(hc));}
+#define hc_init(s) {(s).t = t_hc;}
 
 #endif /* end of include guard: HILLCLIMB_H_AED3PJBQ */

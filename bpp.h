@@ -27,6 +27,7 @@ typedef struct bpp_t {
 	struct list_head list;
 } bpp;
 
+#include "solver.h"
 
 /**
 * @brief: Create a string that represents the content of instance
@@ -71,11 +72,12 @@ static inline int lower_bound(const bpp instance);
 * e em seguida, aplica as heuristicas contidas no vetor solvers
 *
 * @param: char * path
-*       : solver solvers[]
+*       : solver ** solvers
+*       : int n_solvers
 *
 * @return: void
 */
-void benchmark(char * path /*, solver solvers[]*/);
+void benchmark(char * path, solver ** solvers, int n_solvers);
 
 #define instance_alloc(inst) \
 		(inst).w = ((inst).n != 0) ?  (int *) malloc((inst).n*sizeof(int)) : NULL

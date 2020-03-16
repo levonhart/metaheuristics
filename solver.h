@@ -1,18 +1,17 @@
 #ifndef SOLVER_H_3PQ6AKOY
 #define SOLVER_H_3PQ6AKOY
 
-#include "sol.h"
 
 /*! \enum solver_type
  *
  *  Types of implemented solvers. Used to identify which solver function to use.
  */
-enum solver_type { 
+typedef enum solver_type_t {
 	t_hc,
 	t_vnd,
 	t_rms,
 	t_ils
-};
+} solver_type;
 
 /*! \struct solver_t
  *  \brief Brief struct description
@@ -20,9 +19,10 @@ enum solver_type {
  *  Detailed description
  */
 typedef struct solver_t{
-	enum solver_type t; /*!< Solver type (0 : unset ) */
+	solver_type t; /*!< Solver type (0 : unset ) */
 } solver;
 
+#include "sol.h"
 
 /**
 * @brief: Start the solver

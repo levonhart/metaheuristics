@@ -1,10 +1,12 @@
 #ifndef SOL_H_JGUSTNUO
 #define SOL_H_JGUSTNUO
 
+typedef struct bin_t bin;
+typedef struct sol_t sol;
+
 #include <stdlib.h>
 #include "bpp.h"
 
-typedef struct bin_t bin;
 
 /*! \struct sol_t
  *  \brief Represents a solution to a instance of BPP
@@ -12,12 +14,12 @@ typedef struct bin_t bin;
  * 	The objective function of the problem is n_bins (minimize number of bins)
  *  inst_ptr is a pointer to the relative instance of the solution,
  */
-typedef struct sol_t{
+struct sol_t{
 	bin * bins; /*!< list of bins, list of bins of itens */
 	size_t * bin_of;
 	bpp * inst_ptr;
 	size_t n_bins, _max_size;
-} sol;
+};
 
 /**
 * @brief: Add item i to bin b
@@ -87,8 +89,9 @@ void sol_trivial(sol * s, bpp instance);
 #define sol_alloc_ptr(s,inst) {s = (struct sol_t *) malloc(sizeof(struct sol_t));	\
 		sol_alloc(*(s),inst);}
 #define sol_decrease_size(s) {(s).bins = (bin *) realloc((s).bins, (1+(s)._max_size/2)*sizeof(bin));}
-#define sol_destroy(s) {while((s).n_bins) sol_remove_bin(&(s),(s).n_bins-1);		\
-		free( (s).bins ); (s).bins=NULL; free( (s).bin_of ); (s).bin_of=NULL;}
+#define sol_destroy(s) {while((s).n_bins>0){sol_remove_bin(&(s),(s).n_bins-1);}		\
+		if ((s).bins) free( (s).bins ); (s).bins=NULL; \
+		if ((s).bins) free( (s).bin_of ); (s).bin_of=NULL;}
 
 #define sol_w_of(s,i) (s).inst_ptr->w[i]
 #define sol_get_bin(sol,j) (sol).bins + j

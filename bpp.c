@@ -53,12 +53,15 @@ char * bpptostr(const bpp instance,char ** dest){
 }
 
 
-void benchmark(char * path /*, solver solvers[] */){
+void benchmark(char * path , solver ** solvers, int n_solvers){
+	if (!path) return;
 	bpp * inst; char * buffer = NULL;
+	sol curr; size_t mean; int n_intances = 0;
 	LIST_HEAD(instances);
 
 	DIR * dir = opendir(path);
 	struct dirent * entry;
+	entry = readdir(dir);
 	while ( (entry = readdir(dir)) ) {
 		if(entry->d_name[0] == '.') continue;
 		instance_alloc_ptr(inst);
@@ -67,17 +70,38 @@ void benchmark(char * path /*, solver solvers[] */){
 		strcpy(relative_path, path);
 		if (relative_path[strlen(relative_path)-1]!='/')
 		strcat(relative_path,"/");
-		printf("%s\n", strcat(relative_path, entry->d_name));
-		// strcat(relative_path, entry->d_name);
+		printf("Instance found: %s\n", strcat(relative_path, entry->d_name));
+
 		read_instance(relative_path, inst);
 		list_add_tail(&inst->list, &instances);
 
 		inst = NULL;
+		n_intances++;
 	}
 	struct list_head * iter;
-	list_for_each(iter, &instances){
-		inst = list_entry(iter, bpp, list);
-		printf("%s\n", bpptostr(*inst, &buffer));
+	for (int i = 0; i < n_solvers; ++i) {
+		if (solvers[i]) {
+			mean = 0;
+			list_for_each(iter, &instances){
+				inst = list_entry(iter, bpp, list);
+				sol_alloc(curr,*inst);
+				sol_trivial(&curr,*inst);
+				solver_start(solvers[i],&curr);
+				/* printf(" ==============================================\n" */
+				/*         "sol %d : %s\n" */
+				/*         "----------------------------------------------\n",i,soltostr(curr,&buffer)); */
+				mean += curr.n_bins;
+				sol_destroy(curr);
+			}
+			mean /= 1.0*n_intances;
+			printf("solver %d t(%s) : %zu\n",i,
+					solvers[i]->t == t_hc ? "HC" :
+					solvers[i]->t == t_vnd ? "VND" :
+					solvers[i]->t == t_rms ? "RMD" :
+					solvers[i]->t == t_ils ? "RMD" :
+					"ERROR",
+					mean);
+		}
 	}
 
 	free(inst); free(buffer);
@@ -85,17 +109,28 @@ void benchmark(char * path /*, solver solvers[] */){
 }
 
 int main(int argc, char *argv[]){
-	char * path = argv[1];
+	char * path = NULL;
 	char * buffer = NULL;
-	if (path==NULL) {
+	int n_sl = 1;
+	if (argc>1) {
+		path = argv[1];
+	} else {
 		path = "instances/Hard28/";
 	}
 
-	/* benchmark(path); */
-	bpp inst;
-	instance_init0(inst);
-	read_instance("instances/Scholl/Scholl_1/N1C1W1_A.txt", &inst);
-	printf("%s\n\n", bpptostr(inst,&buffer));
+	solver ** solvers = (solver**) calloc(n_sl, sizeof(solver*));
+	hc * HC;
+	hc_alloc(HC);
+	hc_init(*HC);
+	solvers[0] = (solver*) HC;
+	printf("solver type: %d\n",solvers[0]->t);
+
+
+	benchmark(path, solvers, n_sl);
+	/* bpp inst; */
+	/* instance_init0(inst); */
+	/* read_instance("instances/Scholl/Scholl_1/N1C1W1_A.txt", &inst); */
+	/* printf("%s\n\n", bpptostr(inst,&buffer)); */
 
 
 
@@ -126,43 +161,43 @@ int main(int argc, char *argv[]){
 	/* } */
 
 	/* sol * s = sol_trivial(inst); */
-	sol s;
-	sol_alloc(s, inst);
-	sol_add_new_bin(&s);
-	printf("%s\n", bintostr(s.bins[0], &buffer, inst.w));
-
-	sol_add_item(&s,20,0);
-	sol_add_item(&s,30,0);
-
-	for (size_t i = 0; i < s.n_bins; ++i) {
-		printf("%s\n", bintostr(s.bins[i], &buffer, inst.w));
-	}
+	/* sol s; */
+	/* sol_alloc(s, inst); */
+	/* sol_add_new_bin(&s); */
+	/* printf("%s\n", bintostr(s.bins[0], &buffer, inst.w)); */
+    /*  */
+	/* sol_add_item(&s,20,0); */
+	/* sol_add_item(&s,30,0); */
+    /*  */
+	/* for (size_t i = 0; i < s.n_bins; ++i) { */
+	/*     printf("%s\n", bintostr(s.bins[i], &buffer, inst.w)); */
+	/* } */
 	/* for (size_t i = 0; i < s.inst_ptr->n; ++i) { */
 	/*     if (s.bin_of[i]) */
 	/*         printf("item %d: bin%s\n", i,bintostr(*s.bin_of[i], &buffer, inst.w)); */
 	/* } */
-	sol_remove_item(&s,20);
+	/* sol_remove_item(&s,20); */
 
-	for (size_t i = 0; i < s.n_bins; ++i) {
-		printf("%s\n", bintostr(s.bins[i], &buffer, inst.w));
-	}
+	/* for (size_t i = 0; i < s.n_bins; ++i) { */
+		/* printf("%s\n", bintostr(s.bins[i], &buffer, inst.w)); */
+	/* } */
 
-	printf("%s\n",soltostr(s,&buffer));
+	/* printf("%s\n",soltostr(s,&buffer)); */
 
 	/* sol trivial = sol_trivial(inst); */
-	sol trivial;
-	sol_alloc(trivial,inst);
-	sol_trivial(&trivial,inst);
+	/* sol trivial; */
+	/* sol_alloc(trivial,inst); */
+	/* sol_trivial(&trivial,inst); */
 	/* sol_alloc(trivial,inst); */
 	/* trivial = sol_trivial(inst); */
-	printf("Trivial solution:\n\n%s\n\n\n",soltostr(trivial,&buffer));
+	/* printf("Trivial solution:\n\n%s\n\n\n",soltostr(trivial,&buffer)); */
 	/* printf("%s\n", bintostr(trivial->bins[0],&buffer,inst.w)); */
 
-	hc HC;
-	hc_init(HC);
-	solver_start( (solver*) &HC,&trivial);
-	printf("%s\n",soltostr(trivial,&buffer));
-	printf("LOWER BOUND:  %d\n",lower_bound(inst));
+	/* hc HC; */
+	/* hc_init(HC); */
+	/* solver_start( (solver*) &HC,&trivial); */
+	/* printf("%s\n",soltostr(trivial,&buffer)); */
+	/* printf("LOWER BOUND:  %d\n",lower_bound(inst)); */
 
 	free(buffer);
 	return 0;

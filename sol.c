@@ -29,7 +29,6 @@ int sol_remove_bin(sol * s, size_t b){
 		bins[i].itens = bins[i+1].itens;
 		bins[i].n = bins[i+1].n;
 		bins[i]._max_size = bins[i+1]._max_size;
-		
 	}
 	for (i = 0; i < s->inst_ptr->n; ++i) {
 		if(s->bin_of[i] > b) s->bin_of[i]--;
@@ -49,11 +48,12 @@ void sol_add_new_bin(sol * s){
 
 void sol_trivial(sol * s, bpp instance){
 	sol * trivial = s;
-	if (!trivial) { sol_alloc_ptr(trivial, instance); }
-	else{
-		sol_destroy(*trivial);
-		sol_alloc(*trivial, instance);
-	}
+	/* if (!trivial) { sol_alloc_ptr(trivial, instance); } */
+	if (!trivial) { fprintf(stderr, "NULL Pointer Error\n"); return;}
+	/* else{ */
+	/*     sol_destroy(*trivial); */
+	/*     sol_alloc(*trivial, instance); */
+	/* } */
 	for (size_t i = 0; i < instance.n; ++i) {
 		sol_add_new_bin(trivial);
 		sol_add_item(trivial,i,i);
@@ -69,7 +69,7 @@ char * soltostr(const sol s, char ** dest){
 	for (size_t i = 0; i < s.n_bins; ++i) {
 		bintostr(s.bins[i], &buffer, s.inst_ptr->w);
 		lbuffer = strlen(buffer);
-		if(size-length <= lbuffer){
+		if(size <  length + lbuffer +1){
 			size = 2*(length+lbuffer+1);
 			str = (char *) realloc(str, size * sizeof(char));
 		}
