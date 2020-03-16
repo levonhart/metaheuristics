@@ -14,7 +14,7 @@ typedef struct bin_t bin;
  */
 typedef struct sol_t{
 	bin * bins; /*!< list of bins, list of bins of itens */
-	bin ** bin_of;
+	size_t * bin_of;
 	bpp * inst_ptr;
 	size_t n_bins, _max_size;
 } sol;
@@ -24,31 +24,32 @@ typedef struct sol_t{
 *
 * @param: sol s
 * 		: size_t i
-*       : bin b
+*       : size_t b
 *
 * @return: int
 */
-int sol_add_item(sol * s, size_t i, bin * b);
+int sol_add_item(sol * s, size_t i, size_t b);
 
 
 /**
-* @brief: Remove empty bin from partial solution
+* @brief: Remove item from partial solution
 *
-* @param:  i
+* @param: sol * s
+* 		: size_t i
 *
 * @return: int
 */
 int sol_remove_item(sol * s, size_t i);
 
 /**
-* @brief: Remove item from partial solution
+* @brief: Remove empty bin from partial solution
 *
 * @param: sol s
-* 		: size_t i
+* 		: size_t b
 *
 * @return: int
 */
-int sol_remove_bin(sol * s, bin * b);
+int sol_remove_bin(sol * s, size_t b);
 
 /**
 * @brief: Create and add new empty bin
@@ -78,19 +79,20 @@ char * soltostr(const sol b, char ** dest);
 */
 void sol_trivial(sol * s, bpp instance);
 
-#define sol_add_i_j(s,i,j) sol_add_item((s),i,&((s)->bins[j]))
 #define sol_alloc(s, inst) {(s).bins = (bin *) malloc((inst).n*sizeof(bin));	\
-		(s).bin_of = (bin **) calloc((inst).n, sizeof(bin*));		\
+		(s).bin_of = (size_t *) calloc((inst).n, sizeof(size_t));		\
 		(s).n_bins = 0; (s)._max_size = (inst).n; (s).inst_ptr = &(inst);}
 #define sol_realloc(s) { (s)._max_size *= 2;		\
 		(s).bins = (bin *) realloc((s).bins,( (s)._max_size )*sizeof(bin));}
 #define sol_alloc_ptr(s,inst) {s = (struct sol_t *) malloc(sizeof(struct sol_t));	\
 		sol_alloc(*(s),inst);}
 #define sol_decrease_size(s) {(s).bins = (bin *) realloc((s).bins, (1+(s)._max_size/2)*sizeof(bin));}
-#define sol_destroy(s) {while((s).n_bins) sol_remove_bin(&(s),&(s).bins[(s).n_bins-1]);		\
+#define sol_destroy(s) {while((s).n_bins) sol_remove_bin(&(s),(s).n_bins-1);		\
 		free( (s).bins ); (s).bins=NULL; free( (s).bin_of ); (s).bin_of=NULL;}
 
 #define sol_w_of(s,i) (s).inst_ptr->w[i]
+#define sol_get_bin(sol,j) (sol).bins + j
+#define sol_get_bin_of(sol,i) ((sol).bins + (sol).bin_of[i]-1)
 
 
 /*! \struct bin_t

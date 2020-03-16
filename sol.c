@@ -1,33 +1,41 @@
 #include <stdio.h>
 #include "sol.h"
 
-int sol_add_item(sol * s, size_t i, bin * b){
+int sol_add_item(sol * s, size_t i, size_t b){
 	if (s->bin_of[i]) return -1;
-	if (b->load + sol_w_of(*s,i) > s->inst_ptr->C) return -2;
+	if (s->bins[b].load + sol_w_of(*s,i) > s->inst_ptr->C) return -2;
+	bin * bin_ptr = sol_get_bin(*s,b);
 
-	bin_add(b,i,sol_w_of(*s,i));
-	s->bin_of[i] = b;
+	bin_add(bin_ptr,i,sol_w_of(*s,i));
+	s->bin_of[i] = b+1;
 	return 0;
 }
 
 
 int sol_remove_item(sol * s, size_t i){
-	bin * b = s->bin_of[i];
-	if (!b) return -1;
+	if (!s->bin_of[i]) return -1;
+	bin * b = sol_get_bin_of(*s,i);
 	bin_remove(b,i,sol_w_of(*s,i));
-	s->bin_of[i] = NULL;
-	if (b->n == 0) sol_remove_bin(s,b);
+	s->bin_of[i] = 0;
 	return 0;
 }
 
-int sol_remove_bin(sol * s, bin * b){
-	for (int i = 0; i < s->n_bins; ++i) {
-		if (s->bins[i].itens == b->itens) {
-			s->bins[i] = s->bins[--s->n_bins];
-			break;
-		}
+int sol_remove_bin(sol * s, size_t b){
+	bin * bins = s->bins;
+	size_t i;
+	bin_destroy(bins[b]);
+	for (i = b; i < s->n_bins-1; ++i) {
+		bins[i].load = bins[i+1].load;
+		bins[i].itens = bins[i+1].itens;
+		bins[i].n = bins[i+1].n;
+		bins[i]._max_size = bins[i+1]._max_size;
+		
 	}
-	bin_destroy(*b);
+	for (i = 0; i < s->inst_ptr->n; ++i) {
+		if(s->bin_of[i] > b) s->bin_of[i]--;
+	}
+
+	s->n_bins--;
 	if (s->_max_size > 2*s->n_bins) sol_decrease_size(*s);
 	return 0;
 }
@@ -46,9 +54,9 @@ void sol_trivial(sol * s, bpp instance){
 		sol_destroy(*trivial);
 		sol_alloc(*trivial, instance);
 	}
-	for (int i = 0; i < instance.n; ++i) {
+	for (size_t i = 0; i < instance.n; ++i) {
 		sol_add_new_bin(trivial);
-		sol_add_i_j(trivial,i,i);
+		sol_add_item(trivial,i,i);
 	}
 }
 
@@ -58,7 +66,7 @@ char * soltostr(const sol s, char ** dest){
 	char * str = (char *) malloc( size*sizeof(char) );
 	char * buffer = NULL;
 	length+= snprintf(str, size,"N:%zu{%c", s.n_bins, !s.n_bins ? '}' : ' ');
-	for (int i = 0; i < s.n_bins; ++i) {
+	for (size_t i = 0; i < s.n_bins; ++i) {
 		bintostr(s.bins[i], &buffer, s.inst_ptr->w);
 		lbuffer = strlen(buffer);
 		if(size-length <= lbuffer){
@@ -83,7 +91,7 @@ void bin_add(bin * b, size_t i, int w){
 }
 
 void bin_remove(bin * b, size_t i, int w){
-	for (int j = 0; j < b->n; ++j) {
+	for (size_t j = 0; j < b->n; ++j) {
 		if (b->itens[j] == i){
 			b->itens[j] = b->itens[--b->n];
 			break;
@@ -98,7 +106,7 @@ char * bintostr(const bin b, char ** dest, const int * w){
 	size_t length = 0;
 	char * str = (char *) malloc( size*sizeof(char) );
 	length+= snprintf(str, size,"L:%d[%c", b.load, !b.n ? ']' : ' ');
-	for (int i = 0; i < b.n; ++i) {
+	for (size_t i = 0; i < b.n; ++i) {
 		if(size-length < 30){
 			size = 3*size/2;
 			str = (char *) realloc(str, size * sizeof(char));
