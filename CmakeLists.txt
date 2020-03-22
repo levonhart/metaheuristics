@@ -1,0 +1,9 @@
+cmake_minimum_required(VERSION 3.11)
+
+project(BinPackingProblem VERSION 0.5 LANGUAGES C)
+
+add_executable(bpp bpp.c bpp.h sol.c sol.h solver.c solver.h hc.c hc.h)
+set_property(TARGET bpp PROPERTY C_STANDARD 11)
+set_property(TARGET bpp PROPERTY C_STANDARD_REQUIRED ON)
+
+target_include_directories(bpp PUBLIC ${BinPackingProblem_SOURCE_DIR})

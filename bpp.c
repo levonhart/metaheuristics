@@ -1,22 +1,24 @@
 #include <stdio.h>
 #include <string.h>
+#include <time.h>
+#include <errno.h>
 #include "bpp.h"
 #include "sol.h"
 #include "solvers.h"
 
 int read_instance(char * path, bpp * instance){
 	FILE* file; fopen_s(&file, path, "r");
-	if (file == NULL) {
-		printf("Arquivo nao existente:\npath: %s\n", path);
-		return -1;
-	}
-	fscanf(file, "%zu%zu", &instance->n, &instance->C);
+	if (file == NULL) { perror("File Opening Error"); return -1; }
+
+	if ( !fscanf(file, "%zu%zu", &instance->n, &instance->C) ) return -2;
+	if (instance->n == 0 || instance->C == 0){ perror("Wrong Formating"); return -2; }
+
 	if (instance == NULL) instance_alloc_ptr(instance);
 	instance_alloc(*instance);
 
 	instance->w_sum = 0;
 	for (size_t i = 0; i < instance->n; ++i) {
-		if( !fscanf(file, "%d", &(instance->w)[i]) ) return -2;
+		if( fscanf(file, "%d", &(instance->w)[i]) == EOF ){ perror("Wrong Formating"); return -2; }
 		instance->w_sum += (instance->w)[i];
 	}
 
@@ -56,7 +58,8 @@ char * bpptostr(const bpp instance,char ** dest){
 void benchmark(char * path , solver ** solvers, int n_solvers){
 	if (!path) return;
 	bpp * inst; char * buffer = NULL;
-	sol curr; size_t mean; int n_intances = 0;
+	sol curr; size_t sum_bins; int n_instances = 0;
+	clock_t t0, t1;
 	LIST_HEAD(instances);
 
 	DIR * dir = opendir(path);
@@ -70,18 +73,25 @@ void benchmark(char * path , solver ** solvers, int n_solvers){
 		strcpy(relative_path, path);
 		if (relative_path[strlen(relative_path)-1]!='/')
 		strcat(relative_path,"/");
-		printf("Instance found: %s\n", strcat(relative_path, entry->d_name));
+		strcat(relative_path, entry->d_name);
 
-		read_instance(relative_path, inst);
-		list_add_tail(&inst->list, &instances);
-
+		if(read_instance(relative_path, inst) == 0){
+			printf("Instance found: %s\n", relative_path);
+			list_add_tail(&inst->list, &instances);
+			n_instances++;
+		}
 		inst = NULL;
-		n_intances++;
+	}
+	if (n_instances == 0){
+		printf("No instance Found\n");
+		return;
 	}
 	struct list_head * iter;
 	for (int i = 0; i < n_solvers; ++i) {
+		int j=0;
 		if (solvers[i]) {
-			mean = 0;
+			sum_bins = 0;
+			t0 = clock();
 			list_for_each(iter, &instances){
 				inst = list_entry(iter, bpp, list);
 				sol_alloc(curr,*inst);
@@ -90,17 +100,20 @@ void benchmark(char * path , solver ** solvers, int n_solvers){
 				/* printf(" ==============================================\n" */
 				/*         "sol %d : %s\n" */
 				/*         "----------------------------------------------\n",i,soltostr(curr,&buffer)); */
-				mean += curr.n_bins;
+				printf("\rSolving... %3d%% completed",++j*100/n_instances);
+				fflush(stdout);
+				sum_bins += curr.n_bins;
 				sol_destroy(curr);
 			}
-			mean /= 1.0*n_intances;
-			printf("solver %d t(%s) : %zu\n",i,
+			t1 = clock();
+			printf("\nsolver %d t(%s) : %lf\t\t execution time: % .5lf secs\n",i,
 					solvers[i]->t == t_hc ? "HC" :
 					solvers[i]->t == t_vnd ? "VND" :
 					solvers[i]->t == t_rms ? "RMD" :
 					solvers[i]->t == t_ils ? "RMD" :
 					"ERROR",
-					mean);
+					sum_bins/(1.0*n_instances),
+					(double) (t1 - t0) / CLOCKS_PER_SEC);
 		}
 	}
 
@@ -115,7 +128,8 @@ int main(int argc, char *argv[]){
 	if (argc>1) {
 		path = argv[1];
 	} else {
-		path = "instances/Hard28/";
+		printf("usage: bbp <path>\n\n   <path>\t\tPath to directory with instances of the bin packing problem\n");
+		exit(-1);
 	}
 
 	solver ** solvers = (solver**) calloc(n_sl, sizeof(solver*));
@@ -123,7 +137,6 @@ int main(int argc, char *argv[]){
 	hc_alloc(HC);
 	hc_init(*HC);
 	solvers[0] = (solver*) HC;
-	printf("solver type: %d\n",solvers[0]->t);
 
 
 	benchmark(path, solvers, n_sl);

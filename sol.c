@@ -25,10 +25,7 @@ int sol_remove_bin(sol * s, size_t b){
 	size_t i;
 	bin_destroy(bins[b]);
 	for (i = b; i < s->n_bins-1; ++i) {
-		bins[i].load = bins[i+1].load;
-		bins[i].itens = bins[i+1].itens;
-		bins[i].n = bins[i+1].n;
-		bins[i]._max_size = bins[i+1]._max_size;
+		bins[i] = bins[i+1];
 	}
 	for (i = 0; i < s->inst_ptr->n; ++i) {
 		if(s->bin_of[i] > b) s->bin_of[i]--;
@@ -69,7 +66,7 @@ char * soltostr(const sol s, char ** dest){
 	for (size_t i = 0; i < s.n_bins; ++i) {
 		bintostr(s.bins[i], &buffer, s.inst_ptr->w);
 		lbuffer = strlen(buffer);
-		if(size <  length + lbuffer +1){
+		if(size <  length + lbuffer + 1 + 3 /* 3 = strlen(" , ") */){
 			size = 2*(length+lbuffer+1);
 			str = (char *) realloc(str, size * sizeof(char));
 		}
