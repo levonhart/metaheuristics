@@ -28,12 +28,24 @@ int sol_remove_bin(sol * s, size_t b){
 		bins[i] = bins[i+1];
 	}
 	for (i = 0; i < s->inst_ptr->n; ++i) {
+		if(s->bin_of[i] == b) s->bin_of[i]=0;
 		if(s->bin_of[i] > b) s->bin_of[i]--;
 	}
 
 	s->n_bins--;
 	if (s->_max_size > 2*s->n_bins) sol_decrease_size(*s);
 	return 0;
+}
+
+void sol_copy(sol * dest, const sol src){
+	sol_reset(*dest);
+	dest->inst_ptr = src.inst_ptr;
+	for (int b = 0; b < src.n_bins; ++b) {
+		if (b == dest->n_bins) sol_add_new_bin(dest);	
+		for (int i = 0; i < src.bins[b].n; ++i) {
+			sol_add_item(dest,src.bins[b].itens[i],b);
+		}		
+	}
 }
 
 void sol_add_new_bin(sol * s){
@@ -43,17 +55,32 @@ void sol_add_new_bin(sol * s){
 	(s->n_bins)++;
 }
 
-void sol_trivial(sol * s, bpp instance){
-	sol * trivial = s;
-	/* if (!trivial) { sol_alloc_ptr(trivial, instance); } */
-	if (!trivial) { fprintf(stderr, "NULL Pointer Error\n"); return;}
+void sol_trivial(sol * s){
+	/* if (!s) { sol_alloc_ptr(s, *s->inst_ptr); } */
+	if (!s) { fprintf(stderr, "NULL Pointer Error\n"); return;}
 	/* else{ */
-	/*     sol_destroy(*trivial); */
-	/*     sol_alloc(*trivial, instance); */
+	/*     sol_destroy(*s); */
+	/*     sol_alloc(*s, *s->inst_ptr); */
 	/* } */
-	for (size_t i = 0; i < instance.n; ++i) {
-		sol_add_new_bin(trivial);
-		sol_add_item(trivial,i,i);
+	sol_reset(*s);
+	for (size_t i = 0; i < s->inst_ptr->n; ++i) {
+		sol_add_new_bin(s);
+		sol_add_item(s,i,i);
+	}
+}
+
+void sol_firstfit(sol * s, size_t order[s->inst_ptr->n]){
+	sol_reset(*s);
+	size_t item;
+	for (size_t i = 0; i < s->inst_ptr->n; ++i) {
+		item = order[i];
+		for (size_t j = 0; j < s->n_bins && s->bin_of[item] == 0; ++j) {
+			sol_add_item(s,item,j);
+		}
+		if (!s->bin_of[item]) {
+			sol_add_new_bin(s);
+			sol_add_item(s,item,s->n_bins-1);
+		}
 	}
 }
 

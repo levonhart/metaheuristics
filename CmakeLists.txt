@@ -2,7 +2,7 @@ cmake_minimum_required(VERSION 3.11)
 
 project(BinPackingProblem VERSION 0.5 LANGUAGES C)
 
-add_executable(bpp bpp.c bpp.h sol.c sol.h solver.c solver.h hc.c hc.h)
+add_executable(bpp bpp.c sol.c solver.c hc.c rms.c)
 set_property(TARGET bpp PROPERTY C_STANDARD 11)
 set_property(TARGET bpp PROPERTY C_STANDARD_REQUIRED ON)
 

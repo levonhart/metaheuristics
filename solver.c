@@ -4,9 +4,9 @@
 
 void solver_start(solver * sl, sol * dest){
 	switch (sl->t) {
-		/* case t_rms: */
-		/*     rms_solve((rms *) sl, dest); */
-		/*     break; */
+		case t_rms:
+			rms_solve((rms *) sl, dest);
+			break;
 		/* case t_ils: */
 		/*     ils_solve((ils *) sl, dest); */
 		/*     break; */

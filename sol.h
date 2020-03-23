@@ -54,6 +54,16 @@ int sol_remove_item(sol * s, size_t i);
 int sol_remove_bin(sol * s, size_t b);
 
 /**
+* @brief: Copy [src] into [dest]
+*
+* @param: sol * dest
+*       : const sol src
+*
+* @return: void
+*/
+void sol_copy(sol * dest, const sol src);
+
+/**
 * @brief: Create and add new empty bin
 *
 * @param: sol s
@@ -75,11 +85,21 @@ char * soltostr(const sol b, char ** dest);
 /**
 * @brief: Initiate trivial solution (each bin with only one item)
 *
-* @param: bpp instance
+* @param: sol * s
 *
 * @return: void
 */
-void sol_trivial(sol * s, bpp instance);
+void sol_trivial(sol * s);
+
+/**
+* @brief: Initiate solution with first fit method
+*
+* @param: sol * s
+* 		: size_t order[n_itens]
+*
+* @return: void
+*/
+void sol_firstfit(sol * s, size_t order[s->inst_ptr->n]);
 
 #define sol_alloc(s, inst) {(s).bins = (bin *) malloc((inst).n*sizeof(bin));	\
 		(s).bin_of = (size_t *) calloc((inst).n, sizeof(size_t));		\
@@ -88,10 +108,13 @@ void sol_trivial(sol * s, bpp instance);
 		(s).bins = (bin *) realloc((s).bins,( (s)._max_size )*sizeof(bin));}
 #define sol_alloc_ptr(s,inst) {s = (struct sol_t *) malloc(sizeof(struct sol_t));	\
 		sol_alloc(*(s),inst);}
-#define sol_decrease_size(s) {(s).bins = (bin *) realloc((s).bins, (1+(s)._max_size/2)*sizeof(bin));}
+#define sol_decrease_size(s) { if ( (s)._max_size/2 >  ((s).inst_ptr)->w_sum/((s).inst_ptr->C +1)  ) { \
+	(s)._max_size = (s)._max_size/2;		\
+	(s).bins = (bin *) realloc((s).bins, ((s)._max_size)*sizeof(bin));} }
 #define sol_destroy(s) {while((s).n_bins>0){sol_remove_bin(&(s),(s).n_bins-1);}		\
 		if ((s).bins) free( (s).bins ); (s).bins=NULL; \
 		if ((s).bins) free( (s).bin_of ); (s).bin_of=NULL;}
+#define sol_reset(s) {while((s).n_bins>0){sol_remove_bin(&(s),(s).n_bins-1);}}
 
 #define sol_w_of(s,i) (s).inst_ptr->w[i]
 #define sol_get_bin(sol,j) (sol).bins + j
