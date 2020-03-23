@@ -7,3 +7,105 @@
 !_TAG_PROGRAM_NAME	Universal Ctags	/Derived from Exuberant Ctags/
 !_TAG_PROGRAM_URL	https://ctags.io/	/official site/
 !_TAG_PROGRAM_VERSION	0.0.0	/30cd8e03/
+BPP_H_JCGHVQGV	bpp.h	/^#define BPP_H_JCGHVQGV$/;"	d
+BUFFSIZE	bpp.c	/^#define BUFFSIZE /;"	d	file:
+BinPackingProblem	CmakeLists.txt	/^project(BinPackingProblem VERSION 0.5 LANGUAGES C)$/;"	p
+C	bpp.h	/^	size_t C, w_sum;$/;"	m	struct:bpp_t	typeref:typename:size_t
+HILLCLIMB_H_AED3PJBQ	hc.h	/^#define HILLCLIMB_H_AED3PJBQ$/;"	d
+MIN_IMPROV	hc.h	/^#define MIN_IMPROV /;"	d
+RMS_H_XLZQHNGS	rms.h	/^#define RMS_H_XLZQHNGS$/;"	d
+SOLVERS_H_QCM5VIBX	solvers.h	/^#define SOLVERS_H_QCM5VIBX$/;"	d
+SOLVER_H_3PQ6AKOY	solver.h	/^#define SOLVER_H_3PQ6AKOY$/;"	d
+SOL_H_JGUSTNUO	sol.h	/^#define SOL_H_JGUSTNUO$/;"	d
+SessionLoad	session.vim	/^let SessionLoad = 1$/;"	v
+_max_size	sol.h	/^	size_t n, _max_size; \/*!< load and bin itens) *\/$/;"	m	struct:bin_t	typeref:typename:size_t
+_max_size	sol.h	/^	size_t n_bins, _max_size;$/;"	m	struct:sol_t	typeref:typename:size_t
+benchmark	bpp.c	/^void benchmark(char * path , solver ** solvers, int n_solvers){$/;"	f	typeref:typename:void
+bin	sol.h	/^typedef struct bin_t bin;$/;"	t	typeref:struct:bin_t
+bin_add	sol.c	/^void bin_add(bin * b, size_t i, int w){$/;"	f	typeref:typename:void
+bin_alloc	sol.h	/^#define bin_alloc(/;"	d
+bin_alloc_ptr	sol.h	/^#define bin_alloc_ptr(/;"	d
+bin_decrease_size	sol.h	/^#define bin_decrease_size(/;"	d
+bin_destroy	sol.h	/^#define bin_destroy(/;"	d
+bin_of	sol.h	/^	size_t * bin_of;$/;"	m	struct:sol_t	typeref:typename:size_t *
+bin_realloc	sol.h	/^#define bin_realloc(/;"	d
+bin_remove	sol.c	/^void bin_remove(bin * b, size_t i, int w){$/;"	f	typeref:typename:void
+bin_t	sol.h	/^struct bin_t{$/;"	s
+bins	sol.h	/^	bin * bins; \/*!< list of bins, list of bins of itens *\/$/;"	m	struct:sol_t	typeref:typename:bin *
+bintostr	sol.c	/^char * bintostr(const bin b, char ** dest, const int * w){$/;"	f	typeref:typename:char *
+bpp	CmakeLists.txt	/^add_executable(bpp bpp.c sol.c solver.c hc.c rms.c)$/;"	t
+bpp	bpp.h	/^} bpp;$/;"	t	typeref:struct:bpp_t
+bpp_t	bpp.h	/^typedef struct bpp_t {$/;"	s
+bpptostr	bpp.c	/^char * bpptostr(const bpp instance,char ** dest){$/;"	f	typeref:typename:char *
+first_imp3	hc.c	/^static bool first_imp3(hc * sl, sol * dest){$/;"	f	typeref:typename:bool	file:
+hc	hc.h	/^} hc;$/;"	t	typeref:struct:hc_t
+hc_alloc	hc.h	/^#define hc_alloc(/;"	d
+hc_init	hc.h	/^#define hc_init(/;"	d
+hc_solve	hc.c	/^void hc_solve(hc * sl, sol * dest){$/;"	f	typeref:typename:void
+hc_t	hc.h	/^typedef struct hc_t{$/;"	s
+inst_ptr	hc.h	/^	bpp * inst_ptr;$/;"	m	struct:hc_t	typeref:typename:bpp *
+inst_ptr	rms.h	/^	bpp * inst_ptr;$/;"	m	struct:rms_t	typeref:typename:bpp *
+inst_ptr	sol.h	/^	bpp * inst_ptr;$/;"	m	struct:sol_t	typeref:typename:bpp *
+instance_alloc	bpp.h	/^#define instance_alloc(/;"	d
+instance_alloc_ptr	bpp.h	/^#define instance_alloc_ptr(/;"	d
+instance_destroy	bpp.h	/^#define instance_destroy(/;"	d
+instance_init	bpp.h	/^#define instance_init(/;"	d
+instance_init0	bpp.h	/^#define instance_init0(/;"	d
+ite	rms.h	/^	unsigned int ite;$/;"	m	struct:rms_t	typeref:typename:unsigned int
+itens	sol.h	/^	size_t * itens;$/;"	m	struct:bin_t	typeref:typename:size_t *
+list	bpp.h	/^	struct list_head list;$/;"	m	struct:bpp_t	typeref:struct:list_head
+load	sol.h	/^	int load;$/;"	m	struct:bin_t	typeref:typename:int
+lower_bound	bpp.c	/^static inline int lower_bound(const bpp instance){$/;"	f	typeref:typename:int	file:
+main	bpp.c	/^int main(int argc, char *argv[]){$/;"	f	typeref:typename:int
+n	bpp.h	/^	size_t n;$/;"	m	struct:bpp_t	typeref:typename:size_t
+n	sol.h	/^	size_t n, _max_size; \/*!< load and bin itens) *\/$/;"	m	struct:bin_t	typeref:typename:size_t
+n_bins	sol.h	/^	size_t n_bins, _max_size;$/;"	m	struct:sol_t	typeref:typename:size_t
+read_instance	bpp.c	/^int read_instance(char * path, bpp * instance){$/;"	f	typeref:typename:int
+rms	rms.h	/^} rms;$/;"	t	typeref:struct:rms_t
+rms_alloc	rms.h	/^#define rms_alloc(/;"	d
+rms_init	rms.h	/^#define rms_init(/;"	d
+rms_solve	rms.c	/^void rms_solve(rms * sl, sol * dest){$/;"	f	typeref:typename:void
+rms_t	rms.h	/^typedef struct rms_t{$/;"	s
+s:l	session.vim	/^let s:l = 160 - ((40 * winheight(0) + 22) \/ 44)$/;"	v
+s:l	session.vim	/^let s:l = 20 - ((19 * winheight(0) + 22) \/ 44)$/;"	v
+s:l	session.vim	/^let s:l = 37 - ((34 * winheight(0) + 22) \/ 44)$/;"	v
+s:l	session.vim	/^let s:l = 5 - ((4 * winheight(0) + 22) \/ 44)$/;"	v
+s:l	session.vim	/^let s:l = 70 - ((33 * winheight(0) + 22) \/ 44)$/;"	v
+s:so_save	session.vim	/^let s:so_save = &so | let s:siso_save = &siso | set so=0 siso=0$/;"	v
+s:sx	session.vim	/^let s:sx = expand("<sfile>:p:r")."x.vim"$/;"	v
+s:wipebuf	session.vim	/^  let s:wipebuf = bufnr('%')$/;"	v
+shuffle	rms.c	/^static void shuffle(size_t v[], size_t n){$/;"	f	typeref:typename:void	file:
+sol	sol.h	/^typedef struct sol_t sol;$/;"	t	typeref:struct:sol_t
+sol_add_item	sol.c	/^int sol_add_item(sol * s, size_t i, size_t b){$/;"	f	typeref:typename:int
+sol_add_new_bin	sol.c	/^void sol_add_new_bin(sol * s){$/;"	f	typeref:typename:void
+sol_alloc	sol.h	/^#define sol_alloc(/;"	d
+sol_alloc_ptr	sol.h	/^#define sol_alloc_ptr(/;"	d
+sol_copy	sol.c	/^void sol_copy(sol * dest, const sol src){$/;"	f	typeref:typename:void
+sol_decrease_size	sol.h	/^#define sol_decrease_size(/;"	d
+sol_destroy	sol.h	/^#define sol_destroy(/;"	d
+sol_firstfit	sol.c	/^void sol_firstfit(sol * s, size_t order[s->inst_ptr->n]){$/;"	f	typeref:typename:void
+sol_get_bin	sol.h	/^#define sol_get_bin(/;"	d
+sol_get_bin_of	sol.h	/^#define sol_get_bin_of(/;"	d
+sol_realloc	sol.h	/^#define sol_realloc(/;"	d
+sol_remove_bin	sol.c	/^int sol_remove_bin(sol * s, size_t b){$/;"	f	typeref:typename:int
+sol_remove_item	sol.c	/^int sol_remove_item(sol * s, size_t i){$/;"	f	typeref:typename:int
+sol_reset	sol.h	/^#define sol_reset(/;"	d
+sol_t	sol.h	/^struct sol_t{$/;"	s
+sol_trivial	sol.c	/^void sol_trivial(sol * s){$/;"	f	typeref:typename:void
+sol_w_of	sol.h	/^#define sol_w_of(/;"	d
+soltostr	sol.c	/^char * soltostr(const sol s, char ** dest){$/;"	f	typeref:typename:char *
+solver	solver.h	/^} solver;$/;"	t	typeref:struct:solver_t
+solver_start	solver.c	/^void solver_start(solver * sl, sol * dest){$/;"	f	typeref:typename:void
+solver_t	solver.h	/^typedef struct solver_t{$/;"	s
+solver_type	solver.h	/^} solver_type;$/;"	t	typeref:enum:solver_type_t
+solver_type_t	solver.h	/^typedef enum solver_type_t {$/;"	g
+swap	rms.c	/^static void swap(size_t * a, size_t * b){$/;"	f	typeref:typename:void	file:
+t	hc.h	/^	solver_type t; \/*!< Solver type *\/$/;"	m	struct:hc_t	typeref:typename:solver_type
+t	rms.h	/^	solver_type t; \/*!< Description *\/$/;"	m	struct:rms_t	typeref:typename:solver_type
+t	solver.h	/^	solver_type t; \/*!< Solver type (0 : unset ) *\/$/;"	m	struct:solver_t	typeref:typename:solver_type
+t_hc	solver.h	/^	t_hc,$/;"	e	enum:solver_type_t
+t_ils	solver.h	/^	t_ils$/;"	e	enum:solver_type_t
+t_rms	solver.h	/^	t_rms,$/;"	e	enum:solver_type_t
+t_vnd	solver.h	/^	t_vnd,$/;"	e	enum:solver_type_t
+w	bpp.h	/^	int * w;$/;"	m	struct:bpp_t	typeref:typename:int *
+w_sum	bpp.h	/^	size_t C, w_sum;$/;"	m	struct:bpp_t	typeref:typename:size_t
