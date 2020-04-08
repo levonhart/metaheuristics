@@ -113,7 +113,7 @@ void sol_firstfit(sol * s, size_t order[s->inst_ptr->n]);
 	(s).bins = (bin *) realloc((s).bins, ((s)._max_size)*sizeof(bin));} }
 #define sol_destroy(s) {while((s).n_bins>0){sol_remove_bin(&(s),(s).n_bins-1);}		\
 		if ((s).bins) free( (s).bins ); (s).bins=NULL; \
-		if ((s).bins) free( (s).bin_of ); (s).bin_of=NULL;}
+		if ((s).bin_of) free( (s).bin_of ); (s).bin_of=NULL;}
 #define sol_reset(s) {while((s).n_bins>0){sol_remove_bin(&(s),(s).n_bins-1);}}
 
 #define sol_w_of(s,i) (s).inst_ptr->w[i]
@@ -171,8 +171,8 @@ char * bintostr(const bin b, char ** dest, const int * w);
 		(b).itens = (size_t *) realloc((b).itens,((b)._max_size)*sizeof(size_t));}
 #define bin_alloc_ptr(b) {b = (struct bin_t *) malloc(sizeof(struct bpp_t));	\
 		bin_alloc(*(b));}
-#define bin_decrease_size(b) {(b)._max_size = (b)._max_size/2 + 1; \
+#define bin_decrease_size(b) {(b)._max_size = 4 > (b)._max_size/2 + 1 ? 4 : (b)._max_size/2 + 1; \
 		(b).itens = (size_t *) realloc((b).itens, ((b)._max_size)*sizeof(size_t));}
-#define bin_destroy(b) {free((b).itens); (b).itens=NULL; (b).n = 0; (b).load = 0;}
+#define bin_destroy(b) {free((b).itens); (b).itens=NULL; (b)._max_size = 0; (b).n = 0; (b).load = 0;}
 
 #endif /* end of include guard: SOL_H_JGUSTNUO */

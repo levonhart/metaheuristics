@@ -1,3 +1,4 @@
+#include <stdio.h>
 #include <stdbool.h>
 #include <time.h>
 #include "rms.h"
@@ -45,5 +46,6 @@ void rms_solve(rms * sl, sol * dest){
 			/* printf("\n%zu HC %zu\n",i+1,dest->n_bins); */
 		}
 	}
+	sol_destroy(curr);
 
 }

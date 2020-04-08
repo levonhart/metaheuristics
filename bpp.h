@@ -79,10 +79,10 @@ static inline int lower_bound(const bpp instance);
 */
 void benchmark(char * path, solver ** solvers, int n_solvers);
 
-#define instance_alloc(inst) \
-		(inst).w = ((inst).n != 0) ?  (int *) malloc((inst).n*sizeof(int)) : NULL
-#define instance_alloc_ptr(inst) inst = (struct bpp_t *) malloc(sizeof(struct bpp_t))
-#define instance_destroy(inst) free( (isnt).w )
+#define instance_alloc(inst) {\
+		(inst).w = ((inst).n != 0) ?  (int *) malloc((inst).n*sizeof(int)) : NULL;}
+#define instance_alloc_ptr(inst) {inst = (struct bpp_t *) malloc(sizeof(struct bpp_t));}
+#define instance_destroy(inst) {free( (isnt).w ); (inst).w = NULL;}
 
 #define instance_init0(inst) {(inst).C = (inst).w_sum = (inst).n = 0; (inst).w = NULL;}
 #define instance_init(inst,c,nitens) {inst.C = c; inst.w_sum = 0; inst.n=nitens;\

@@ -96,6 +96,7 @@ void benchmark(char * path , solver ** solvers, int n_solvers){
 			sum_bins = 0;
 			t0 = clock();
 			list_for_each(iter, &instances){
+				j++;
 				inst = list_entry(iter, bpp, list);
 				sol_alloc(curr,*inst);
 				sol_trivial(&curr);
@@ -103,17 +104,17 @@ void benchmark(char * path , solver ** solvers, int n_solvers){
 				/* printf(" ==============================================\n" */
 				/*         "sol %d : %s\n" */
 				/*         "----------------------------------------------\n",i,soltostr(curr,&buffer)); */
-				printf("\rSolving... %3d%% completed",++j*100/n_instances);
+				printf("\rSolving... %3d%% [%3d/%3d] completed",j*100/n_instances, j, n_instances);
 				fflush(stdout);
 				sum_bins += curr.n_bins;
 				sol_destroy(curr);
 			}
 			t1 = clock();
-			snprintf(buff,BUFFSIZE,"solver %d t(%s) : %lf\t\t execution time: % .5lf secs\n",i,
-					solvers[i]->t == t_hc ? "HC" :
+			snprintf(buff,BUFFSIZE,"solver %d t(%s): %lf\t\t execution time: % .5lf secs\n",i,
+					solvers[i]->t == t_hc ? "HC " :
 					solvers[i]->t == t_vnd ? "VND" :
-					solvers[i]->t == t_rms ? "RMD" :
-					solvers[i]->t == t_ils ? "RMD" :
+					solvers[i]->t == t_rms ? "RMS" :
+					solvers[i]->t == t_ils ? "ILS" :
 					"ERROR",
 					sum_bins/(1.0*n_instances),
 					(double) (t1 - t0) / CLOCKS_PER_SEC);
@@ -122,7 +123,10 @@ void benchmark(char * path , solver ** solvers, int n_solvers){
 		}
 	}
 
-	free(inst); free(buffer);
+	list_for_each(iter, &instances){
+		free(list_entry(iter, bpp, list));
+	}
+	free(buffer);
 	closedir(dir);
 }
 
@@ -147,7 +151,6 @@ int main(int argc, char *argv[]){
 	rms_alloc(RMS);
 	rms_init(*RMS,5);
 	solvers[1] = (solver*) RMS;
-	printf("%u\n", RMS->ite);
 
 
 	benchmark(path, solvers, n_sl);

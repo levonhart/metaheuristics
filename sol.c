@@ -41,10 +41,10 @@ void sol_copy(sol * dest, const sol src){
 	sol_reset(*dest);
 	dest->inst_ptr = src.inst_ptr;
 	for (int b = 0; b < src.n_bins; ++b) {
-		if (b == dest->n_bins) sol_add_new_bin(dest);	
+		if (b == dest->n_bins) sol_add_new_bin(dest);
 		for (int i = 0; i < src.bins[b].n; ++i) {
 			sol_add_item(dest,src.bins[b].itens[i],b);
-		}		
+		}
 	}
 }
 
@@ -121,7 +121,7 @@ void bin_remove(bin * b, size_t i, int w){
 			break;
 		}
 	}
-	if (b->_max_size > 3*b->n && b->n>8) bin_decrease_size(*b);
+	if (b->_max_size > 3*b->n) bin_decrease_size(*b);
 	b->load-=w;
 }
 
