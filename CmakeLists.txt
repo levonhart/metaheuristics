@@ -1,9 +1,20 @@
-cmake_minimum_required(VERSION 3.11)
+cmake_minimum_required(VERSION 3.15...3.17)
 
-project(BinPackingProblem VERSION 0.5 LANGUAGES C)
+project(BinPackingProblem VERSION 0.5.1 LANGUAGES C)
 
-add_executable(bpp bpp.c sol.c solver.c hc.c rms.c)
-set_property(TARGET bpp PROPERTY C_STANDARD 11)
+add_executable(	bpp
+				bpp.c
+				sol.c
+				solver.c
+				hc.c
+				rms.c
+)
+set_property(TARGET bpp PROPERTY C_STANDARD 17)
 set_property(TARGET bpp PROPERTY C_STANDARD_REQUIRED ON)
+
+option(MSVC_DLL "Dynamic link C runtime library (Windows Only)" OFF)
+if(NOT MSVC_DLL)
+	set_property(TARGET bpp PROPERTY MSVC_RUNTIME_LIBRARY "MultiThreaded$<$<CONFIG:Debug>:Debug>")
+endif()
 
 target_include_directories(bpp PUBLIC ${BinPackingProblem_SOURCE_DIR})
